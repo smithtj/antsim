@@ -1,4 +1,4 @@
-package com.worldwarant.antsim.Simulation;
+package com.worldwarant.antsim.simulation;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.Level;

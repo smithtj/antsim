@@ -1,6 +1,6 @@
 package com.worldwarant.antsim;
 
-import com.worldwarant.antsim.Simulation.Simulator;
+import com.worldwarant.antsim.simulation.Simulator;
 import com.worldwarant.antsim.common.GameUtils;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ex.ConfigurationException;
