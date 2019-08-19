@@ -38,5 +38,7 @@ public class Program {
             logger.log(Level.ERROR, e.getMessage());
         }
 
+        String[] a = new String[-1];
+
     }
 }
