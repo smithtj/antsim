@@ -29,7 +29,7 @@ public class EventManager {
         getSubscribersByType(eventType).remove(listener);
     }
 
-    private List<EventListener> getSubscribersByType(String eventType) {
+    private List<EventListener> getSubscribersByType(String eventType) throws IllegalArgumentException {
         if (eventType == null || eventType.isEmpty()) {
             String message = "Null or empty eventType passed to getSubscribersByType.";
             logger.log(Level.ERROR, message);

@@ -17,4 +17,8 @@ public class Simulator {
         logger.log(Level.ALL, "Simulation successful.");
         System.out.println("Hello sim.");
     }
+
+    public void initialiseSimulation() {
+
+    }
 }

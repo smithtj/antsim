@@ -43,7 +43,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -52,21 +51,37 @@
                     <mainClass>${main-class}</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
         </plugins>
     </build>
-
-
-
     <properties>
         <main-class>com.worldwarant.antsim.Program</main-class>
-
         <log4j.version>2.12.1</log4j.version>
         <commons-configuration2.version>2.5</commons-configuration2.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
-        <common-configuration2>2.0</common-configuration2>
+        <common-configuration2.version>2.0</common-configuration2.version>
+        <junit.version>5.5.1</junit.version>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -92,9 +107,5 @@
             <artifactId>commons-configuration2</artifactId>
             <version>${commons-configuration2.version}</version>
         </dependency>
-
-
     </dependencies>
-
-
 </project>
