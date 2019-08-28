@@ -4,9 +4,9 @@ import org.apache.commons.configuration2.Configuration;
 
 public abstract class EntityBase {
 
-    private final Configuration gameConfig;
+    protected final Configuration gameConfig;
 
-    public EntityBase(Configuration gameConfig) {
+    protected EntityBase(Configuration gameConfig) {
         this.gameConfig = gameConfig;
     }
 

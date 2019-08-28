@@ -83,10 +83,7 @@ public class World {
     }
 
     private <T extends AntBase> String getAntName(Class<T> antType) {
-        String[] antClassParts = antType.toGenericString().split("[.]");
-        String fullAntName = Arrays.stream(antClassParts)
-                .filter(s -> s.endsWith("Ant"))
-                .findFirst().orElseThrow(RuntimeException::new);
+        String fullAntName = antType.getSimpleName();
         String antName = fullAntName.replaceFirst("Ant", "").toLowerCase();
         return antName;
     }

@@ -1,11 +1,15 @@
 package com.worldwarant.antsim.simulation.entities;
 
 import com.worldwarant.antsim.common.observer.EventManager;
+import org.apache.commons.configuration2.Configuration;
 
-public class Structure {
-    private final EventManager eventManager;
+public abstract class Structure extends EntityBase {
+    protected final EventManager eventManager;
 
-    public Structure(EventManager manager) {
+    protected Structure(EventManager manager, Configuration gameConfig) {
+        super(gameConfig);
         this.eventManager = manager;
     }
+
+
 }
