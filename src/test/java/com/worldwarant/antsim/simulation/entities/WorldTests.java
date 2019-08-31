@@ -25,8 +25,8 @@ public class WorldTests {
     @DisplayName("Multiple instances of world should be same object.")
     @Test
     void worldIsSingletonTest() {
-        World world1 = World.getInstance(gameConfig);
-        World world2 = World.getInstance(gameConfig);
+        World world1 = World.getInstance();
+        World world2 = World.getInstance();
 
         assertEquals(world1, world2);
     }
@@ -35,7 +35,8 @@ public class WorldTests {
     @Test
     void worldAntsQuantitiesMatchConfig() {
         //arrange
-        World newWorld = World.getInstance(gameConfig);
+        World newWorld = World.getInstance();
+        newWorld.tryInitialiseGameWorld(gameConfig);
 
         //act
         int workerConfigQty = gameConfig.getInt("ants.worker.quantity");

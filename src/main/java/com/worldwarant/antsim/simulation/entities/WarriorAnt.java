@@ -1,19 +1,21 @@
 package com.worldwarant.antsim.simulation.entities;
 
+import com.worldwarant.antsim.common.GameUtils;
 import com.worldwarant.antsim.simulation.entities.resources.Resource;
 import org.apache.commons.configuration2.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WarriorAnt extends AntBase {
 
     private final List<Resource> inventory;
-    private int maxCapacity;
+    private final Map<String, Integer> capacities;
     public WarriorAnt(Configuration gameConfig) {
         super(gameConfig);
         inventory = new ArrayList<>();
-        maxCapacity = gameConfig.getInt("ants.warrior.capacity.max");
+        capacities = GameUtils.parseBySubset(gameConfig, "ants.warrior.capacity");
     }
 
     @Override
@@ -27,7 +29,7 @@ public class WarriorAnt extends AntBase {
     }
 
     public int availableSlots(Class<? extends Resource> type) {
-        int available = this.getCapacityFromConfig(type) - getCount(type);
+        int available = this.getCapacity(type) - getCount(type);
         return available;
     }
 
@@ -35,9 +37,13 @@ public class WarriorAnt extends AntBase {
         return (int)inventory.stream().filter(type::isInstance).count();
     }
 
-    private int getCapacityFromConfig(Class<? extends Resource> type) {
+    private int getCapacity(Class<? extends Resource> type) {
         String typeName = type.getSimpleName();
-        return gameConfig.getInt(String.format("ants.warrior.capacity.%s", typeName));
+        return capacities.get(typeName.toLowerCase());
+    }
+
+    private int getCapacity(String key) {
+        return capacities.get(key.toLowerCase());
     }
 
     @Override

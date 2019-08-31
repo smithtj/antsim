@@ -14,37 +14,59 @@ import java.util.stream.IntStream;
 public class World {
 
     private static volatile World instance;
-    private final Configuration config;
+    private Configuration config;
     private static final Logger logger = LogManager.getLogger(World.class);
+
+    private volatile boolean canModify = true;
 
     private List<WorkerAnt> workers;
     private List<WarriorAnt> warriors;
     private List<QueenAnt> queens;
+    private Nest nest;
 
-    private World(Configuration gameConfig)
+    private World()
     {
         logger.log(Level.DEBUG, "World instance created.");
-        this.config = gameConfig;
-        initialiseWorld();
     }
 
-    private void initialiseWorld() {
+    public boolean tryInitialiseGameWorld(Configuration gameConfiguration) {
+        synchronized (World.class) {
+            boolean modified = false;
+            if (!this.canModify()) {
+                return modified;
+            }
+            else {
+                canModify = false;
+                initialiseGameWorld(gameConfiguration);
+                modified = true;
+                return modified;
+            }
+        }
+    }
+
+    private void initialiseGameWorld(Configuration gameConfig) {
+        config = gameConfig;
+        nest = new Nest(gameConfig);
         workers = initialiseAnts(WorkerAnt.class);
         warriors = initialiseAnts(WarriorAnt.class);
         queens = initialiseAnts(QueenAnt.class);
     }
 
-    public static World getInstance(Configuration gameConfig) {
+    public static World getInstance() {
         World result = instance;
         if (result == null) {
             synchronized(World.class) {
                 result = instance;
                 if (result == null) {
-                    instance = result = new World(gameConfig);
+                    instance = result = new World();
                 }
             }
         }
         return result;
+    }
+
+    public boolean canModify() {
+        return this.canModify;
     }
 
     public List<WorkerAnt> getWorkers() {
@@ -76,7 +98,7 @@ public class World {
         String antTypeName = getAntName(antType);
         int workerQuantity = config.getInt(
                 String.format("ants.%s.quantity", antTypeName)
-                );
+        );
         logger.log(Level.DEBUG, String.format("World initialising %d %s.", workerQuantity, antTypeName));
         List<T> ants = newEntities(antType, workerQuantity);
         return ants;

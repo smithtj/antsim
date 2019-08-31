@@ -68,6 +68,7 @@
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <common-configuration2.version>2.0</common-configuration2.version>
         <junit.version>5.5.1</junit.version>
+        <commons-lang3.version>3.0</commons-lang3.version>
     </properties>
     <dependencies>
         <dependency>
@@ -107,5 +108,12 @@
             <artifactId>commons-configuration2</artifactId>
             <version>${commons-configuration2.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
     </dependencies>
 </project>
