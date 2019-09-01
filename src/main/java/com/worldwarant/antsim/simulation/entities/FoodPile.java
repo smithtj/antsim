@@ -10,29 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodPile extends Structure {
-    private final int capacity;
-    private final List<Resource> inventory;
-
     protected FoodPile(EventManager manager, Configuration gameConfig) {
-        super(manager, gameConfig);
-        capacity = GameUtils.parseBySubset(gameConfig, "foodPile").get("capacity");
-        inventory = new ArrayList<>();
+        super(manager, gameConfig, GameUtils.parseBySubset(gameConfig, "foodPile").get("capacity"), new ArrayList<>());
     }
 
     @Override
     public String toString() {
         return null;
-    }
-
-    public boolean isFull() {
-        return inventory.size() >= capacity;
-    }
-
-    public <T extends Resource> void deposit(T resourceToDeposit) {
-        inventory.add(resourceToDeposit);
-    }
-
-    public Resource take() {
-        return inventory.remove(RandomUtils.getRandomInRange(inventory.size()));
     }
 }

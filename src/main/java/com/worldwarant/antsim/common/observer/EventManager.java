@@ -16,9 +16,16 @@ public class EventManager {
                 .forEach(antOp -> this.subscribers.put(antOp, new ArrayList<EventListener>()));
     }
 
-    public void notify(String eventType, Object source) {
+    public void notify(String eventType, Object source) throws SubscriptionException{
         getSubscribersByType(eventType)
-                   .forEach(sub -> sub.update(eventType, source));
+                   .forEach(sub ->{
+                       try {
+                       sub.update(eventType, source);
+        }
+        catch (SubscriptionException e) {
+                           throw new RuntimeException("Subscription exception unhandled", e);
+        }});
+
     }
 
     public void subscribe(String eventType, EventListener listener) {
