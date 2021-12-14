@@ -60,7 +60,7 @@
     <properties>
         <main-class>com.worldwarant.antsim.Program</main-class>
 
-        <log4j.version>2.12.1</log4j.version>
+        <log4j.version>2.16.0</log4j.version>
         <commons-configuration2.version>2.5</commons-configuration2.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <common-configuration2>2.0</common-configuration2>
